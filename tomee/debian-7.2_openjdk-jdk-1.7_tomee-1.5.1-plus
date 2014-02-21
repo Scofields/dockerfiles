@@ -1,0 +1,9 @@
+FROM rstiller/java:debian-7.2_openjdk-jdk-1.7
+
+
+
+ADD http://archive.apache.org/dist/openejb/openejb-4.5.1/apache-tomee-1.5.1-plus.tar.gz   /usr/share/apache-tomee.tar.gz
+RUN cd /usr/share ; tar xfvz apache-tomee.tar.gz
+
+CMD ['/usr/share/apache-tomee-*/bin/startup.sh']
+
