@@ -1,0 +1,25 @@
+FROM ubuntu:12.10
+
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ quantal main restricted \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal main restricted \n\
+deb http://us.archive.ubuntu.com/ubuntu/ quantal-updates main restricted \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal-updates main restricted \n\
+deb http://us.archive.ubuntu.com/ubuntu/ quantal universe \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal universe \n\
+deb http://us.archive.ubuntu.com/ubuntu/ quantal-updates universe \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal-updates universe \n\
+deb http://us.archive.ubuntu.com/ubuntu/ quantal multiverse \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal multiverse \n\
+deb http://us.archive.ubuntu.com/ubuntu/ quantal-updates multiverse \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal-updates multiverse \n\
+deb http://us.archive.ubuntu.com/ubuntu/ quantal-backports main restricted universe multiverse \n\
+deb-src http://us.archive.ubuntu.com/ubuntu/ quantal-backports main restricted universe multiverse \n\
+deb http://security.ubuntu.com/ubuntu quantal-security main restricted \n\
+deb-src http://security.ubuntu.com/ubuntu quantal-security main restricted \n\
+deb http://security.ubuntu.com/ubuntu quantal-security universe \n\
+deb-src http://security.ubuntu.com/ubuntu quantal-security universe \n\
+deb http://security.ubuntu.com/ubuntu quantal-security multiverse \n\
+deb-src http://security.ubuntu.com/ubuntu quantal-security multiverse" > /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install -y openjdk-6-jdk
+ENV JAVA_HOME /usr/lib/jvm/java-6-openjdk-amd64/

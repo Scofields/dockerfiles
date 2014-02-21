@@ -1,0 +1,5 @@
+FROM tianon/debian:6.0.7
+
+RUN apt-get update
+RUN apt-get install -y openjdk-6-jre
+ENV JAVA_HOME /usr/lib/jvm/java-6-openjdk/
