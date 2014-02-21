@@ -1,0 +1,9 @@
+FROM rstiller/java:debian-6.0.7_oracle_jdk-1.7
+
+RUN apt-get -q update
+RUN apt-get install -y wget openssl unzip build-essential make
+RUN wget --output-document=/tmp/resin-src.zip http://www.caucho.com/download/resin-4.0.37-src.zip
+RUN unzip /tmp/resin-src.zip -d /usr/src
+RUN cd /usr/src/resin* ; chmod +x configure
+RUN cd /usr/src/resin* ; ./configure --prefix=/usr/local/share/resin --with-resin-root=/var/resin --with-resin-log=/var/log/resin --with-resin-conf=/etc/resin
+RUN cd /usr/src/resin* ; make && make install
