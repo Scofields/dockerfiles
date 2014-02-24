@@ -1,6 +1,5 @@
 FROM tianon/debian:6.0.7
 
-ADD jdk-7u45-linux-x64.tar.gz /usr/share/jdk.tar.gz
-RUN cd /usr/share ; tar -zxvf jdk.tar.gz
-RUN ln -s /usr/share/jdk*/bin/* /usr/bin/
+RUN apt-get update
+RUN apt-get install -y sun-java6-jdk
 ENV JAVA_HOME /usr/share/jdk1.7.0_45/
