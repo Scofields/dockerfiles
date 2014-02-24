@@ -17,6 +17,13 @@ for argument in $*
                 ;;
             --template=*|-t=*)
                 template=`echo $argument | awk -F'=' '{print $2}'`
+                
+                if [ ! -e "$template" ]
+                then
+                    echo "template file $template not found."
+                    exit -1
+                fi
+                
                 echo "using template: $template"
                 ;;
             --repository=*|-r=*)
@@ -48,6 +55,22 @@ printFiles() {
         done
 }
 
+replaceAllPlaceholders() {
+    
+    for i in "${!placeholders[@]}"
+        do
+            placeholder=${placeholders[$i]}
+            value_count=${values_count[$i]}
+
+            for (( c=0 ; c < $value_count ; c++ )) {
+                value=${values[$i,$c]}
+                sed -i "s/[$]$placeholder/$value/g" "${1}"
+            }
+
+        done
+    
+}
+
 for i in "${!placeholders[@]}"
     do
         placeholder=${placeholders[$i]}
@@ -67,7 +90,10 @@ for i in "${!placeholders[@]}"
         
     done
 
+mkdir -p "$repository"
+
 for i in "${!files[@]}"
     do
         cp "$template" "$repository/${files[$i]}"
+        replaceAllPlaceholders "$repository/${files[$i]}"
     done
