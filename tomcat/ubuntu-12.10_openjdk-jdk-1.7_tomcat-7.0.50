@@ -1,8 +1,8 @@
-FROM rstiller/java:ubuntu-12.10_openjdk-jdk-1.7
+FROM rstiller/java:ubuntu-12.10_openjdk_jdk-1.7
 
 RUN apt-get -q update
 RUN apt-get install -y wget
-RUN wget --output-document=/usr/share/apache-tomcat.tar.gz http://www.eu.apache.org/dist/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.tar.gz
+RUN wget --output-document=/usr/share/apache-tomcat.tar.gz http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.tar.gz
 RUN cd /usr/share ; tar xfvz apache-tomcat.tar.gz
 
 CMD ['/usr/share/apache-tomcat-*/bin/startup.sh']

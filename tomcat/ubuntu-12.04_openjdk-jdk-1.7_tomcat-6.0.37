@@ -1,4 +1,4 @@
-FROM rstiller/java:ubuntu-12.04_openjdk-jdk-1.7
+FROM rstiller/java:ubuntu-12.04_openjdk_jdk-1.7
 
 RUN apt-get -q update
 RUN apt-get install -y wget
