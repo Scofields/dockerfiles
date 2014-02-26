@@ -1,0 +1,33 @@
+{
+    "template": "debian.tpl",
+    "name": "${0}_${1}_${2}",
+    "variables": [
+        [
+            {
+                "os": "6.0.7"
+            },
+            {
+                "os": "6.0.8"
+            }
+        ],
+        [
+            {
+                "java": "openjdk_jdk-1.6"
+            },
+            {
+                "java": "openjdk_jdk-1.7"
+            }
+        ],
+        [
+            {
+                "vertx": "2.0.0"
+            },
+            {
+                "vertx": "2.0.1"
+            },
+            {
+                "vertx": "2.0.2"
+            }
+        ]
+    ]
+}

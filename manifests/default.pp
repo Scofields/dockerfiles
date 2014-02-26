@@ -18,6 +18,7 @@ package { [
     'wget',
     'git',
     'build-essential',
+    'nodejs',
     ]:
     ensure => latest,
 } ->

@@ -17,18 +17,11 @@ for argument in $*
                 ;;
             --template=*|-t=*)
                 template=`echo $argument | awk -F'=' '{print $2}'`
-                
-                if [ ! -e "$template" ]
-                then
-                    echo "template file $template not found."
-                    exit -1
-                fi
-                
                 echo "using template: $template"
                 ;;
             --repository=*|-r=*)
                 repository=`echo $argument | awk -F'=' '{print $2}'`
-                echo "for repository: $repository"
+                echo "using repository: $repository"
                 ;;
             *)
                 placeholders[$placeholder_index]=`echo $argument | awk -F'=' '{print $1}'`
@@ -45,7 +38,14 @@ for argument in $*
         esac
     done
 
+if [ ! -e "$repository/$template" ]
+then
+    echo "template file $repository/$template not found."
+    exit -1
+fi
+
 declare -A files
+declare -A fileValues
 files[0]=$name_template
 
 printFiles() {
@@ -60,13 +60,12 @@ replaceAllPlaceholders() {
     for i in "${!placeholders[@]}"
         do
             placeholder=${placeholders[$i]}
-            value_count=${values_count[$i]}
-
-            for (( c=0 ; c < $value_count ; c++ )) {
-                value=${values[$i,$c]}
-                sed -i "s/[$]$placeholder/$value/g" "${1}"
-            }
-
+            file=${files[${1}]}
+            value=${fileValues[${1}]}
+            
+            echo "$file - $placeholder - $value"
+            
+            #sed -i "s/[$]$placeholder/$value/g" "$repository/$file"
         done
     
 }
@@ -83,7 +82,15 @@ for i in "${!placeholders[@]}"
             
             for (( c=0 ; c < $value_count ; c++ )) {
                 value=${values[$i,$c]}
-                files[$[c*original_files_count+f]]=`echo $originalTemplate | sed "s/[$]$placeholder/$value/g"`
+                fileKey=$[c*original_files_count+f]
+                files[$fileKey]=`echo $originalTemplate | sed "s/[$]$placeholder/$value/g"`
+                
+                if [ ${fileValues[$fileKey]+1} ]
+                then
+                    fileValues[$fileKey]="${fileValues[$fileKey]};$placeholder=$value"
+                else
+                    fileValues[$fileKey]="$placeholder=$value"
+                fi
             }
             
         }
@@ -94,6 +101,6 @@ mkdir -p "$repository"
 
 for i in "${!files[@]}"
     do
-        cp "$template" "$repository/${files[$i]}"
-        replaceAllPlaceholders "$repository/${files[$i]}"
+        cp "$repository/$template" "$repository/${files[$i]}"
+        replaceAllPlaceholders $i
     done
