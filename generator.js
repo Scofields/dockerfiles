@@ -6,10 +6,12 @@
 
 var fs = require('fs');
 var path = require('path');
+var spawn = require('child_process').spawn;
 
 var config = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 var repository = path.dirname(process.argv[2]);
 var template = path.join(repository, config.template);
+var build = !!process.argv[3] && process.argv[3] === '--build';
 
 function Variable(values) {
     
@@ -100,6 +102,34 @@ var writeFile = function(directory, templateFile, nameTemplate, values) {
     fs.writeFileSync(targetFile, content);
 };
 
+var buildImage = function(directory, repository, nameTemplate, values) {
+    var targetDir = nameTemplate;
+    var tag = repository + ':';
+    
+    for(var i = 0; i < values.length; i++) {
+        
+        for(var placeholder in values[i]) {
+            targetDir = targetDir.replace(new RegExp('\\$\\{' + i + '\\}', 'g'), values[i][placeholder]);
+        }
+    }
+    
+    tag += targetDir;
+    
+    targetDir = path.join(directory, targetDir);
+    logFile = targetDir + '.log';
+    if(!path.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir);
+    }
+    
+    var logFileStream = fs.createWriteStream(logFile);
+    var process = spawn('docker', ['build', '--rm', '-t', tag, '.'], {
+        cwd: targetDir
+    });
+    
+    process.stdout.pipe(logFileStream);
+    process.stderr.pipe(logFileStream);
+};
+
 var variables = [];
 for(var variableIndex in config.variables) {
     variables.push(new Variable(config.variables[variableIndex]));
@@ -107,5 +137,9 @@ for(var variableIndex in config.variables) {
 
 var iterator = new Iterator(variables);
 while(iterator.hasNext()) {
-    writeFile(repository, template, config.name, iterator.next());
+    var values = iterator.next();
+    writeFile(repository, template, config.name, values);
+    if(build) {
+        buildImage(repository, config.repository, config.name, values);
+    }
 }
