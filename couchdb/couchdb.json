@@ -1,0 +1,65 @@
+[
+    {
+        "template": "couchdb-squeeze-pre-1.4.tpl",
+        "name": "debian-${0}_couchdb-${1}",
+        "repository": "rstiller/couchdb",
+        "variables": [
+            [
+                { "tag": "squeeze", "repository": "debian" }
+            ],
+            [
+                {"couchdb": "1.2.2"},
+                {"couchdb": "1.3.0"},
+                {"couchdb": "1.3.1"}
+            ]
+        ]
+    },
+    {
+        "template": "couchdb-squeeze-post-1.4.tpl",
+        "name": "debian-${0}_couchdb-${1}",
+        "repository": "rstiller/couchdb",
+        "variables": [
+            [
+                { "tag": "squeeze", "repository": "debian" }
+            ],
+            [
+                {"couchdb": "1.4.0"},
+                {"couchdb": "1.5.0"}
+            ]
+        ]
+    },
+    {
+        "template": "couchdb-wheezy.tpl",
+        "name": "debian-${0}_couchdb-${1}",
+        "repository": "rstiller/couchdb",
+        "variables": [
+            [
+                { "tag": "wheezy", "repository": "debian" }
+            ],
+            [
+                {"couchdb": "1.4.0"},
+                {"couchdb": "1.5.0"}
+            ]
+        ]
+    },
+    {
+        "template": "couchdb-ubuntu.tpl",
+        "name": "ubuntu-${0}_couchdb-${1}",
+        "repository": "rstiller/couchdb",
+        "variables": [
+            [
+                { "tag": "12.04", "repository": "ubuntu", "nickname": "precise" },
+                { "tag": "12.10", "repository": "ubuntu", "nickname": "quantal" },
+                { "tag": "13.04", "repository": "ubuntu", "nickname": "raring" },
+                { "tag": "13.10", "repository": "ubuntu", "nickname": "saucy" }
+            ],
+            [
+                {"couchdb": "1.2.2"},
+                {"couchdb": "1.3.0"},
+                {"couchdb": "1.3.1"},
+                {"couchdb": "1.4.0"},
+                {"couchdb": "1.5.0"}
+            ]
+        ]
+    }
+]

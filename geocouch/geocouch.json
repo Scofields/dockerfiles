@@ -1,0 +1,23 @@
+[
+    {
+        "template": "geocouch.tpl",
+        "name": "${0}_couchdb-${1}",
+        "repository": "rstiller/geocouch",
+        "variables": [
+            [
+                { "name": "debian-squeeze" },
+                { "name": "debian-wheezy" },
+                { "name": "ubuntu-12.04" },
+                { "name": "ubuntu-12.10" },
+                { "name": "ubuntu-13.04" },
+                { "name": "ubuntu-13.10" }
+            ],
+            [
+                {"couchdb": "1.3.0"},
+                {"couchdb": "1.3.1"},
+                {"couchdb": "1.4.0"},
+                {"couchdb": "1.5.0"}
+            ]
+        ]
+    }
+]

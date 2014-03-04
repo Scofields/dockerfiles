@@ -8,9 +8,8 @@ var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
 
-var config = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+var configs = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 var repository = path.dirname(process.argv[2]);
-var template = path.join(repository, config.template);
 var build = !!process.argv[3] && process.argv[3] === '--build';
 
 function Variable(values) {
@@ -102,7 +101,7 @@ var writeFile = function(directory, templateFile, nameTemplate, values) {
     fs.writeFileSync(targetFile, content);
 };
 
-var buildImage = function(directory, repository, nameTemplate, values) {
+var getBuildCommand = function(directory, repository, nameTemplate, values) {
     var targetDir = nameTemplate;
     var tag = repository + ':';
     
@@ -117,29 +116,56 @@ var buildImage = function(directory, repository, nameTemplate, values) {
     
     targetDir = path.join(directory, targetDir);
     logFile = targetDir + '.log';
-    if(!path.existsSync(targetDir)) {
-        fs.mkdirSync(targetDir);
+    
+    return {
+        dir: targetDir,
+        log: logFile,
+        cmd: ['docker', ['build', '--rm', '-t', tag, '.'], {
+            cwd: targetDir
+        }],
+        tag: tag
+    };
+};
+
+var buildCommands = [];
+for(var i = 0; i < configs.length; i++) {
+    var config = configs[i];
+    var variables = [];
+    var template = path.join(repository, config.template);
+    for(var variableIndex in config.variables) {
+        variables.push(new Variable(config.variables[variableIndex]));
+    }
+
+    var iterator = new Iterator(variables);
+    while(iterator.hasNext()) {
+        var values = iterator.next();
+        writeFile(repository, template, config.name, values);
+        if(build) {
+            buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
+        }
+    }
+}
+
+var commandIndex = 0;
+var executeNextBuild = function() {
+    var command = buildCommands[commandIndex++];
+    if(!path.existsSync(command.dir)) {
+        fs.mkdirSync(command.dir);
     }
     
-    var logFileStream = fs.createWriteStream(logFile);
-    var process = spawn('docker', ['build', '--rm', '-t', tag, '.'], {
-        cwd: targetDir
-    });
+    var logFileStream = fs.createWriteStream(command.log);
+    var process = spawn.apply(null, command.cmd);
     
     process.stdout.pipe(logFileStream);
     process.stderr.pipe(logFileStream);
+    process.on('exit', function (code) {
+        console.log(command.tag + (code === 0 ? ' built' : ' not built'));
+        if(commandIndex < buildCommands.length) {
+            executeNextBuild();
+        }
+    });
 };
 
-var variables = [];
-for(var variableIndex in config.variables) {
-    variables.push(new Variable(config.variables[variableIndex]));
-}
-
-var iterator = new Iterator(variables);
-while(iterator.hasNext()) {
-    var values = iterator.next();
-    writeFile(repository, template, config.name, values);
-    if(build) {
-        buildImage(repository, config.repository, config.name, values);
-    }
+if(build && buildCommands.length > 0) {
+    executeNextBuild();
 }

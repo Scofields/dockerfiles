@@ -1,27 +1,29 @@
-{
-    "template": "vertx.tpl",
-    "name": "${0}_${1}_${2}",
-    "repository": "rstiller/vertx",
-    "variables": [
-        [
-            { "os": "debian-6.0.7" },
-            { "os": "debian-7.0" },
-            { "os": "debian-7.1" },
-            { "os": "debian-7.2" },
-            { "os": "debian-7.3" },
-            { "os": "ubuntu-12.04" },
-            { "os": "ubuntu-12.10" },
-            { "os": "ubuntu-13.04" },
-            { "os": "ubuntu-13.10" }
-        ],
-        [
-            {"java": "oracle_jdk-1.7"},
-            {"java": "openjdk_jdk-1.7"}
-        ],
-        [
-            {"vertx": "2.0.0"},
-            {"vertx": "2.0.1"},
-            {"vertx": "2.0.2"}
+[
+    {
+        "template": "vertx.tpl",
+        "name": "${0}_${1}_${2}",
+        "repository": "rstiller/vertx",
+        "variables": [
+            [
+                { "os": "debian-6.0.7" },
+                { "os": "debian-7.0" },
+                { "os": "debian-7.1" },
+                { "os": "debian-7.2" },
+                { "os": "debian-7.3" },
+                { "os": "ubuntu-12.04" },
+                { "os": "ubuntu-12.10" },
+                { "os": "ubuntu-13.04" },
+                { "os": "ubuntu-13.10" }
+            ],
+            [
+                {"java": "oracle_jdk-1.7"},
+                {"java": "openjdk_jdk-1.7"}
+            ],
+            [
+                {"vertx": "2.0.0"},
+                {"vertx": "2.0.1"},
+                {"vertx": "2.0.2"}
+            ]
         ]
-    ]
-}
+    }
+]

@@ -1,0 +1,40 @@
+[
+    {
+        "template": "orion.tpl",
+        "name": "${0}_jetty-${1}",
+        "repository": "rstiller/jetty",
+        "variables": [
+            [
+                { "name": "debian-squeeze_openjdk-6-jdk" },
+                { "name": "debian-squeeze_openjdk-6-jre" },
+                { "name": "debian-squeeze_openjdk-7-jdk" },
+                { "name": "debian-squeeze_openjdk-7-jre" },
+                { "name": "debian-wheezy_openjdk-6-jdk" },
+                { "name": "debian-wheezy_openjdk-6-jre" },
+                { "name": "debian-wheezy_openjdk-7-jdk" },
+                { "name": "debian-wheezy_openjdk-7-jre" },
+                { "name": "ubuntu-12.04_openjdk-6-jdk" },
+                { "name": "ubuntu-12.04_openjdk-6-jre" },
+                { "name": "ubuntu-12.04_openjdk-7-jdk" },
+                { "name": "ubuntu-12.04_openjdk-7-jre" },
+                { "name": "ubuntu-12.10_openjdk-6-jdk" },
+                { "name": "ubuntu-12.10_openjdk-6-jre" },
+                { "name": "ubuntu-12.10_openjdk-7-jdk" },
+                { "name": "ubuntu-12.10_openjdk-7-jre" },
+                { "name": "ubuntu-13.04_openjdk-6-jdk" },
+                { "name": "ubuntu-13.04_openjdk-6-jre" },
+                { "name": "ubuntu-13.04_openjdk-7-jdk" },
+                { "name": "ubuntu-13.04_openjdk-7-jre" },
+                { "name": "ubuntu-13.10_openjdk-6-jdk" },
+                { "name": "ubuntu-13.10_openjdk-6-jre" },
+                { "name": "ubuntu-13.10_openjdk-7-jdk" },
+                { "name": "ubuntu-13.10_openjdk-7-jre" }
+            ],
+            [
+                {"jetty": "7.6.14", "version": "7.6.14.v20131031"},
+                {"jetty": "8.1.14", "version": "8.1.14.v20131031"},
+                {"jetty": "9.1.0", "version": "9.1.0.v20131115"}
+            ]
+        ]
+    }
+]
