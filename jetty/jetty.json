@@ -1,6 +1,6 @@
 [
     {
-        "template": "orion.tpl",
+        "template": "jetty.tpl",
         "name": "${0}_jetty-${1}",
         "repository": "rstiller/jetty",
         "variables": [
