@@ -1,8 +1,0 @@
-FROM rstiller/java:debian-6.0.7_oracle_jdk-1.7
-
-RUN apt-get -q update
-RUN apt-get install -y wget
-RUN wget --output-document=/usr/share/apache-tomcat.tar.gz http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.47/bin/apache-tomcat-7.0.47.tar.gz
-RUN cd /usr/share ; tar xfvz apache-tomcat.tar.gz
-
-CMD ['/usr/share/apache-tomcat-*/bin/startup.sh']

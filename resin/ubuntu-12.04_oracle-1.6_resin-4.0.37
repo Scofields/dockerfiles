@@ -1,7 +1,0 @@
-FROM rstiller/java:ubuntu-12.04_oracle-1.6
-
-RUN apt-get -q update
-RUN apt-get install -y wget
-RUN wget --output-document=/tmp/resin.deb http://www.caucho.com/download/debian/dists/precise/multiverse/binary-amd64/resin-pro_4.0.37-amd64.deb
-RUN cd /tmp ; dpkg -i resin.deb
-RUN apt-get install -y

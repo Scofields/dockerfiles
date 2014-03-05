@@ -1,0 +1,54 @@
+[
+    {
+        "template": "resin-debian-src.tpl",
+        "name": "${0}_resin-src-${1}",
+        "repository": "rstiller/resin",
+        "variables": [
+            [
+                { "name": "debian-squeeze_openjdk-6-jdk" },
+                { "name": "debian-squeeze_openjdk-7-jdk" },
+                { "name": "debian-wheezy_openjdk-6-jdk" },
+                { "name": "debian-wheezy_openjdk-7-jdk" }
+            ],
+            [
+                {"resin": "4.0.37"},
+                {"resin": "4.0.38"}
+            ]
+        ]
+    },
+    {
+        "template": "resin-debian.tpl",
+        "name": "${0}_resin-${1}",
+        "repository": "rstiller/resin",
+        "variables": [
+            [
+                { "name": "debian-squeeze", "repository": "debian", "tag": "squeeze" },
+                { "name": "debian-wheezy", "repository": "debian", "tag": "wheezy" }
+            ],
+            [
+                {"resin": "4.x"}
+            ]
+        ]
+    },
+    {
+        "template": "resin-ubuntu.tpl",
+        "name": "${0}_resin-${1}",
+        "repository": "rstiller/resin",
+        "variables": [
+            [
+                { "name": "ubuntu-12.04_openjdk-6-jdk" },
+                { "name": "ubuntu-12.04_openjdk-7-jdk" },
+                { "name": "ubuntu-12.10_openjdk-6-jdk" },
+                { "name": "ubuntu-12.10_openjdk-7-jdk" },
+                { "name": "ubuntu-13.04_openjdk-6-jdk" },
+                { "name": "ubuntu-13.04_openjdk-7-jdk" },
+                { "name": "ubuntu-13.10_openjdk-6-jdk" },
+                { "name": "ubuntu-13.10_openjdk-7-jdk" }
+            ],
+            [
+                {"resin": "4.0.37"},
+                {"resin": "4.0.38"}
+            ]
+        ]
+    }
+]

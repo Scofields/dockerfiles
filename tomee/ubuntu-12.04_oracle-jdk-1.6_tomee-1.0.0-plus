@@ -1,9 +1,0 @@
-FROM rstiller/java:ubuntu-12.04_oracle_jdk-1.6
-
-
-
-ADD http://archive.apache.org/dist/openejb/openejb-4.0.0/apache-tomee-1.0.0-plus.tar.gz /usr/share/apache-tomee.tar.gz
-RUN cd /usr/share ; tar xfvz apache-tomee.tar.gz
-
-CMD ['/usr/share/apache-tomee-*/bin/startup.sh']
-

@@ -1,0 +1,30 @@
+[
+    {
+        "template": "tomee.tpl",
+        "name": "${0}_tomee-${1}",
+        "repository": "rstiller/tomee",
+        "variables": [
+            [
+                { "name": "debian-squeeze_openjdk-6-jdk" },
+                { "name": "debian-squeeze_openjdk-7-jdk" },
+                { "name": "debian-wheezy_openjdk-6-jdk" },
+                { "name": "debian-wheezy_openjdk-7-jdk" },
+                { "name": "ubuntu-12.04_openjdk-6-jdk" },
+                { "name": "ubuntu-12.04_openjdk-7-jdk" },
+                { "name": "ubuntu-12.10_openjdk-6-jdk" },
+                { "name": "ubuntu-12.10_openjdk-7-jdk" },
+                { "name": "ubuntu-13.04_openjdk-6-jdk" },
+                { "name": "ubuntu-13.04_openjdk-7-jdk" },
+                { "name": "ubuntu-13.10_openjdk-6-jdk" },
+                { "name": "ubuntu-13.10_openjdk-7-jdk" }
+            ],
+            [
+                {"tomee": "1.0.0", "path": "openejb/openejb-4.0.0" },
+                {"tomee": "1.5.0", "path": "openejb/openejb-4.5.0" },
+                {"tomee": "1.5.1", "path": "openejb/openejb-4.5.1" },
+                {"tomee": "1.5.2", "path": "tomee/tomee-1.5.2" },
+                {"tomee": "1.6.0", "path": "tomee/tomee-1.6.0" }
+            ]
+        ]
+    }
+]
