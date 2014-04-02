@@ -24,6 +24,7 @@
                 {"tomcat": "7.0.47", "family": "7" },
                 {"tomcat": "7.0.50", "family": "7" },
                 {"tomcat": "7.0.52", "family": "7" },
+                {"tomcat": "7.0.53", "family": "7" },
                 {"tomcat": "8.0.1", "family": "8" }
             ]
         ]
