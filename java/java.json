@@ -1,0 +1,73 @@
+[
+    {
+        "template": "apt-package-debian.tpl",
+        "name": "debian-${0}_${1}",
+        "repository": "rstiller/java",
+        "variables": [
+            [
+                { "os": "squeeze" },
+                { "os": "wheezy" }
+            ],
+            [
+                {"java": "openjdk-6-jdk", "java_home": "java-6-openjdk"},
+                {"java": "openjdk-6-jre", "java_home": "java-6-openjdk"},
+                {"java": "openjdk-7-jdk", "java_home": "java-7-openjdk-amd64"},
+                {"java": "openjdk-7-jre", "java_home": "java-7-openjdk-amd64"}
+            ]
+        ]
+    }, {
+        "template": "resources-debian.tpl",
+        "name": "debian-${0}_${1}",
+        "repository": "rstiller/java",
+        "variables": [
+            [
+                { "os": "squeeze" },
+                { "os": "wheezy" }
+            ],
+            [
+                {"java": "oracle-8-jdk", "java_flavour": "jdk", "java_version": "8u5", "java_path": "1.8.0_05"},
+                {"java": "oracle-8-jre", "java_flavour": "jre", "java_version": "8u5", "java_path": "1.8.0_05"},
+                {"java": "oracle-7-jdk", "java_flavour": "jdk", "java_version": "7u55", "java_path": "1.7.0_55"},
+                {"java": "oracle-7-jre", "java_flavour": "jre", "java_version": "7u55", "java_path": "1.7.0_55"}
+            ]
+        ]
+    }, {
+        "template": "apt-package-ubuntu.tpl",
+        "name": "ubuntu-${0}_${1}",
+        "repository": "rstiller/java",
+        "variables": [
+            [
+                { "os": "12.04", "nickname": "precise" },
+                { "os": "12.10", "nickname": "quantal" },
+                { "os": "13.04", "nickname": "raring" },
+                { "os": "13.10", "nickname": "saucy" },
+                { "os": "14.04", "nickname": "trusty" }
+            ],
+            [
+                {"java": "openjdk-6-jdk", "java_home": "java-6-openjdk-amd64"},
+                {"java": "openjdk-6-jre", "java_home": "java-6-openjdk-amd64"},
+                {"java": "openjdk-7-jdk", "java_home": "java-7-openjdk-amd64"},
+                {"java": "openjdk-7-jre", "java_home": "java-7-openjdk-amd64"}
+            ]
+        ]
+    }, {
+        "template": "resources-ubuntu.tpl",
+        "name": "ubuntu-${0}_${1}",
+        "repository": "rstiller/java",
+        "variables": [
+            [
+                { "os": "12.04", "nickname": "precise" },
+                { "os": "12.10", "nickname": "quantal" },
+                { "os": "13.04", "nickname": "raring" },
+                { "os": "13.10", "nickname": "saucy" },
+                { "os": "14.04", "nickname": "trusty" }
+            ],
+            [
+                {"java": "oracle-8-jdk", "java_flavour": "jdk", "java_version": "8u5", "java_path": "1.8.0_05"},
+                {"java": "oracle-8-jre", "java_flavour": "jre", "java_version": "8u5", "java_path": "1.8.0_05"},
+                {"java": "oracle-7-jdk", "java_flavour": "jdk", "java_version": "7u55", "java_path": "1.7.0_55"},
+                {"java": "oracle-7-jre", "java_flavour": "jre", "java_version": "7u55", "java_path": "1.7.0_55"}
+            ]
+        ]
+    }
+]

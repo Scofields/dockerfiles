@@ -8,9 +8,10 @@ var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
 
-var configs = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+var configs    = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 var repository = path.dirname(process.argv[2]);
-var build = !!process.argv[3] && process.argv[3] === '--build';
+var build      = !!process.argv[3] && process.argv[3] === '--build';
+var homeDir    = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 function Variable(values) {
     
@@ -93,12 +94,16 @@ var writeFile = function(directory, templateFile, nameTemplate, values) {
         }
     }
     
-    targetDir = path.join(directory, targetDir);
+    targetDir = path.join(homeDir, directory, targetDir);
     targetFile = path.join(targetDir, 'Dockerfile');
     if(!path.existsSync(targetDir)) {
         fs.mkdirSync(targetDir);
     }
     fs.writeFileSync(targetFile, content);
+    
+    if(path.existsSync(path.join(directory, 'resources'))) {
+        spawn.apply(null, ['ln', ['-s', path.resolve(path.join(directory, 'resources')), path.resolve(targetDir)]]);
+    }
 };
 
 var getBuildCommand = function(directory, repository, nameTemplate, values) {
@@ -114,7 +119,7 @@ var getBuildCommand = function(directory, repository, nameTemplate, values) {
     
     tag += targetDir;
     
-    targetDir = path.join(directory, targetDir);
+    targetDir = path.join(homeDir, directory, targetDir);
     logFile = targetDir + '.log';
     
     return {
@@ -139,6 +144,9 @@ for(var i = 0; i < configs.length; i++) {
     var iterator = new Iterator(variables);
     while(iterator.hasNext()) {
         var values = iterator.next();
+        if(!path.existsSync(path.resolve(path.join(homeDir, repository)))) {
+            fs.mkdirSync(path.resolve(path.join(homeDir, repository)));
+        }
         writeFile(repository, template, config.name, values);
         if(build) {
             buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
