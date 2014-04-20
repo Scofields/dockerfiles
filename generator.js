@@ -11,7 +11,7 @@ var spawn = require('child_process').spawn;
 var configs    = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 var repository = path.dirname(process.argv[2]);
 var build      = !!process.argv[3] && process.argv[3] === '--build';
-var homeDir    = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+var homeDir    = path.join(process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'], 'shared');
 
 function Variable(values) {
     
@@ -82,7 +82,7 @@ function Iterator(variables) {
     
 }
 
-var writeFile = function(directory, templateFile, nameTemplate, values) {
+var writeFile = function(directory, templateFile, nameTemplate, values, copyResources) {
     var targetDir = nameTemplate;
     var content = fs.readFileSync(templateFile, 'utf8');
     
@@ -96,13 +96,18 @@ var writeFile = function(directory, templateFile, nameTemplate, values) {
     
     targetDir = path.join(homeDir, directory, targetDir);
     targetFile = path.join(targetDir, 'Dockerfile');
-    if(!path.existsSync(targetDir)) {
+    if(!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir);
     }
     fs.writeFileSync(targetFile, content);
     
-    if(path.existsSync(path.join(directory, 'resources'))) {
-        spawn.apply(null, ['ln', ['-s', path.resolve(path.join(directory, 'resources')), path.resolve(targetDir)]]);
+    if(fs.existsSync(path.join(directory, 'resources')) && copyResources === true) {
+        var files = fs.readdirSync(path.resolve(path.join(directory, 'resources')));
+        for(var i = 0; i < files.length; i++) {
+            if(!fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
+                spawn('cp', [path.resolve(path.join(directory, 'resources', files[i])), path.resolve(targetDir) + '/']);
+            }
+        }
     }
 };
 
@@ -144,10 +149,10 @@ for(var i = 0; i < configs.length; i++) {
     var iterator = new Iterator(variables);
     while(iterator.hasNext()) {
         var values = iterator.next();
-        if(!path.existsSync(path.resolve(path.join(homeDir, repository)))) {
+        if(!fs.existsSync(path.resolve(path.join(homeDir, repository)))) {
             fs.mkdirSync(path.resolve(path.join(homeDir, repository)));
         }
-        writeFile(repository, template, config.name, values);
+        writeFile(repository, template, config.name, values, config.resources);
         if(build) {
             buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
         }
@@ -157,7 +162,7 @@ for(var i = 0; i < configs.length; i++) {
 var commandIndex = 0;
 var executeNextBuild = function() {
     var command = buildCommands[commandIndex++];
-    if(!path.existsSync(command.dir)) {
+    if(!fs.existsSync(command.dir)) {
         fs.mkdirSync(command.dir);
     }
     

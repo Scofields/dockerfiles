@@ -17,6 +17,7 @@
         ]
     }, {
         "template": "resources-debian.tpl",
+        "resources": true,
         "name": "debian-${0}_${1}",
         "repository": "rstiller/java",
         "variables": [
@@ -52,6 +53,7 @@
         ]
     }, {
         "template": "resources-ubuntu.tpl",
+        "resources": true,
         "name": "ubuntu-${0}_${1}",
         "repository": "rstiller/java",
         "variables": [

@@ -11,9 +11,11 @@ Vagrant::configure("2") do |config|
         end
     end
     
+    config.vm.synced_folder "~/vagrant-tmp", "/home/vagrant/shared/"
+    
     config.vm.provider :virtualbox do |v, override|
-        override.vm.box = 'precise64'
-        override.vm.box_url = 'http://files.vagrantup.com/precise64.box'
+        override.vm.box = 'trusty64'
+        override.vm.box_url = 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box'
         v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
         v.customize ["modifyvm", :id, "--memory", 4096]
         v.customize ["modifyvm", :id, "--cpus", 4]
