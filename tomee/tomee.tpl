@@ -4,4 +4,3 @@ ADD http://archive.apache.org/dist/${path}/apache-tomee-${tomee}-plus.tar.gz /us
 RUN cd /usr/share ; tar xfvz apache-tomee.tar.gz
 
 CMD ['/usr/share/apache-tomee-*/bin/startup.sh']
-
