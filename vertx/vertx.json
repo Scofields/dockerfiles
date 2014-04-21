@@ -5,19 +5,19 @@
         "repository": "rstiller/vertx",
         "variables": [
             [
-                { "os": "debian-6.0.7" },
-                { "os": "debian-7.0" },
-                { "os": "debian-7.1" },
-                { "os": "debian-7.2" },
-                { "os": "debian-7.3" },
+                { "os": "debian-squeeze" },
+                { "os": "debian-wheezy" },
                 { "os": "ubuntu-12.04" },
                 { "os": "ubuntu-12.10" },
                 { "os": "ubuntu-13.04" },
-                { "os": "ubuntu-13.10" }
+                { "os": "ubuntu-13.10" },
+                { "os": "ubuntu-14.04" }
             ],
             [
-                {"java": "oracle_jdk-1.7"},
-                {"java": "openjdk_jdk-1.7"}
+                {"java": "openjdk-6-jdk"},
+                {"java": "openjdk-7-jdk"},
+                {"java": "oracle-7-jdk"},
+                {"java": "oracle-8-jdk"}
             ],
             [
                 {"vertx": "2.0.0"},
