@@ -1,6 +1,6 @@
 [
     {
-        "template": "resin-debian-src.tpl",
+        "template": "resin.tpl",
         "name": "${0}_resin-${1}",
         "repository": "rstiller/resin",
         "variables": [
