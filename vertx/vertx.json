@@ -14,7 +14,6 @@
                 { "os": "ubuntu-14.04" }
             ],
             [
-                {"java": "openjdk-6-jdk"},
                 {"java": "openjdk-7-jdk"},
                 {"java": "oracle-7-jdk"},
                 {"java": "oracle-8-jdk"}
