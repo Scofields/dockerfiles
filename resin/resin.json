@@ -21,6 +21,8 @@
                 { "name": "ubuntu-13.04_openjdk-7-jdk" },
                 { "name": "ubuntu-13.10_openjdk-6-jdk" },
                 { "name": "ubuntu-13.10_openjdk-7-jdk" },
+                { "name": "ubuntu-14.04_openjdk-6-jdk" },
+                { "name": "ubuntu-14.04_openjdk-7-jdk" },
                 { "name": "ubuntu-12.04_oracle-7-jdk" },
                 { "name": "ubuntu-12.04_oracle-8-jdk" },
                 { "name": "ubuntu-12.10_oracle-7-jdk" },
@@ -28,7 +30,9 @@
                 { "name": "ubuntu-13.04_oracle-7-jdk" },
                 { "name": "ubuntu-13.04_oracle-8-jdk" },
                 { "name": "ubuntu-13.10_oracle-7-jdk" },
-                { "name": "ubuntu-13.10_oracle-8-jdk" }
+                { "name": "ubuntu-13.10_oracle-8-jdk" },
+                { "name": "ubuntu-14.04_oracle-7-jdk" },
+                { "name": "ubuntu-14.04_oracle-8-jdk" }
             ],
             [
                 {"resin": "4.0.37"},
