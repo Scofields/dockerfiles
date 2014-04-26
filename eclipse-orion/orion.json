@@ -1,8 +1,10 @@
 [
     {
         "template": "orion.tpl",
-        "name": "${0}_orion-${1}",
+        "name": "${name}_orion-${orion}",
         "repository": "rstiller/eclipse-orion",
+        "resources": true,
+        "resourceNamePattern": "eclipse-orion-${orion}.*",
         "variables": [
             [
                 { "name": "debian-squeeze_openjdk-6-jdk" },
