@@ -1,7 +1,7 @@
 [
     {
         "template": "couchdb-squeeze-pre-1.4.tpl",
-        "name": "debian-${0}_couchdb-${1}",
+        "name": "debian-${tag}_couchdb-${couchdb}",
         "repository": "rstiller/couchdb",
         "variables": [
             [
@@ -16,7 +16,7 @@
     },
     {
         "template": "couchdb-squeeze-post-1.4.tpl",
-        "name": "debian-${0}_couchdb-${1}",
+        "name": "debian-${tag}_couchdb-${couchdb}",
         "repository": "rstiller/couchdb",
         "variables": [
             [
@@ -31,7 +31,7 @@
     },
     {
         "template": "couchdb-wheezy.tpl",
-        "name": "debian-${0}_couchdb-${1}",
+        "name": "debian-${tag}_couchdb-${couchdb}",
         "repository": "rstiller/couchdb",
         "variables": [
             [
@@ -46,7 +46,7 @@
     },
     {
         "template": "couchdb-ubuntu.tpl",
-        "name": "ubuntu-${0}_couchdb-${1}",
+        "name": "ubuntu-${tag}_couchdb-${couchdb}",
         "repository": "rstiller/couchdb",
         "variables": [
             [
