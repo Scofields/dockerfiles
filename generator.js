@@ -90,12 +90,16 @@ var writeFile = function(directory, templateFile, nameTemplate, values, copyReso
     
     for(var i = 0; i < values.length; i++) {
         for(var placeholder in values[i]) {
+            if(!!resourceRegExp) {
+                resourceRegExp = resourceRegExp.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+            }
             targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
-            resourceRegExp = resourceRegExp.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
             content = content.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
         }
     }
-    resourceRegExp = new RegExp(resourceRegExp, 'g');
+    if(!!resourceRegExp) {
+        resourceRegExp = new RegExp(resourceRegExp, 'g');
+    }
     
     targetDir = path.join(homeDir, directory, targetDir);
     targetFile = path.join(targetDir, 'Dockerfile');
@@ -107,7 +111,8 @@ var writeFile = function(directory, templateFile, nameTemplate, values, copyReso
     if(fs.existsSync(path.join(directory, 'resources')) && copyResources === true) {
         var files = fs.readdirSync(path.resolve(path.join(directory, 'resources')));
         for(var i = 0; i < files.length; i++) {
-            if(resourceRegExp.test(files[i]) && !fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
+            if((!!resourceRegExp && resourceRegExp.test(files[i]) || !resourceRegExp)
+                && !fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
                 spawn('cp', [path.resolve(path.join(directory, 'resources', files[i])), path.resolve(targetDir) + '/']);
             }
         }
