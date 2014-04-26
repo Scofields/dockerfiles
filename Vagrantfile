@@ -21,6 +21,7 @@ Vagrant::configure("2") do |config|
         v.customize ["modifyvm", :id, "--cpus", 4]
         v.customize ["modifyvm", :id, "--hwvirtex", "on"]
         v.customize ["modifyvm", :id, "--nestedpaging", "on"]
+        v.customize ["storagectl", :id, "--name", "SATAController", "--hostiocache", "off"]
     end
     
 end

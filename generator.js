@@ -82,17 +82,19 @@ function Iterator(variables) {
     
 }
 
-var writeFile = function(directory, templateFile, nameTemplate, values, copyResources) {
+var writeFile = function(directory, templateFile, nameTemplate, values, copyResources, resourceNamePattern) {
     var targetDir = nameTemplate;
     var content = fs.readFileSync(templateFile, 'utf8');
+    var resourceRegExp = resourceNamePattern;
     
     for(var i = 0; i < values.length; i++) {
-        
         for(var placeholder in values[i]) {
-            targetDir = targetDir.replace(new RegExp('\\$\\{' + i + '\\}', 'g'), values[i][placeholder]);
+            targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+            resourceRegExp = resourceRegExp.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
             content = content.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
         }
     }
+    resourceRegExp = new RegExp(resourceRegExp, 'g');
     
     targetDir = path.join(homeDir, directory, targetDir);
     targetFile = path.join(targetDir, 'Dockerfile');
@@ -104,7 +106,7 @@ var writeFile = function(directory, templateFile, nameTemplate, values, copyReso
     if(fs.existsSync(path.join(directory, 'resources')) && copyResources === true) {
         var files = fs.readdirSync(path.resolve(path.join(directory, 'resources')));
         for(var i = 0; i < files.length; i++) {
-            if(!fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
+            if(resourceRegExp.test(files[i]) && !fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
                 spawn('cp', [path.resolve(path.join(directory, 'resources', files[i])), path.resolve(targetDir) + '/']);
             }
         }
@@ -116,9 +118,8 @@ var getBuildCommand = function(directory, repository, nameTemplate, values) {
     var tag = repository + ':';
     
     for(var i = 0; i < values.length; i++) {
-        
         for(var placeholder in values[i]) {
-            targetDir = targetDir.replace(new RegExp('\\$\\{' + i + '\\}', 'g'), values[i][placeholder]);
+            targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
         }
     }
     
@@ -152,7 +153,7 @@ for(var i = 0; i < configs.length; i++) {
         if(!fs.existsSync(path.resolve(path.join(homeDir, repository)))) {
             fs.mkdirSync(path.resolve(path.join(homeDir, repository)));
         }
-        writeFile(repository, template, config.name, values, config.resources);
+        writeFile(repository, template, config.name, values, config.resources, config.resourceNamePattern);
         if(build) {
             buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
         }
