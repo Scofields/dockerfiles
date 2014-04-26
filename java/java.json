@@ -1,7 +1,7 @@
 [
     {
         "template": "apt-package-debian.tpl",
-        "name": "debian-${0}_${1}",
+        "name": "debian-${os}_${java}",
         "repository": "rstiller/java",
         "variables": [
             [
@@ -18,7 +18,7 @@
     }, {
         "template": "resources-debian.tpl",
         "resources": true,
-        "name": "debian-${0}_${1}",
+        "name": "debian-${os}_${java}",
         "repository": "rstiller/java",
         "variables": [
             [
@@ -34,7 +34,7 @@
         ]
     }, {
         "template": "apt-package-ubuntu.tpl",
-        "name": "ubuntu-${0}_${1}",
+        "name": "ubuntu-${os}_${java}",
         "repository": "rstiller/java",
         "variables": [
             [
@@ -54,7 +54,7 @@
     }, {
         "template": "resources-ubuntu.tpl",
         "resources": true,
-        "name": "ubuntu-${0}_${1}",
+        "name": "ubuntu-${os}_${java}",
         "repository": "rstiller/java",
         "variables": [
             [
