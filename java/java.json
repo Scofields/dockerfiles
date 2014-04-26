@@ -37,7 +37,7 @@
     }, {
         "template": "resources.tpl",
         "resources": true,
-        "resourceNamePattern": ".*${java_path}.*",
+        "resourceNamePattern": ".*${java_flavour}-${java_version}.*",
         "name": "${os}_${java}",
         "repository": "rstiller/java",
         "variables": [
