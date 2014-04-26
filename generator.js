@@ -160,7 +160,8 @@ var getPushCommand = function(directory, repository, nameTemplate, values) {
         cmd: ['docker', ['push', tag], {
             cwd: targetDir
         }],
-        tag: tag
+        tag: tag,
+        type: 'push'
     };
 };
 
@@ -202,7 +203,11 @@ var executeNextBuild = function() {
     process.stdout.pipe(logFileStream);
     process.stderr.pipe(logFileStream);
     process.on('exit', function (code) {
-        console.log(command.tag + (code === 0 ? ' built' : ' not built'));
+        if(!!command.type && command.type === 'push') {
+            console.log(command.tag + (code === 0 ? ' pushed' : ' not pushed'));
+        } else {
+            console.log(command.tag + (code === 0 ? ' built' : ' not built'));
+        }
         if(commandIndex < buildCommands.length) {
             executeNextBuild();
         }
