@@ -1,8 +1,10 @@
 [
     {
         "template": "resin.tpl",
-        "name": "${0}_resin-${1}",
+        "name": "${name}_resin-${resin}",
         "repository": "rstiller/resin",
+        "resources": true,
+        "resourceNamePattern": "resin-${resin}.*",
         "variables": [
             [
                 { "name": "debian-squeeze_openjdk-6-jdk" },
