@@ -1,7 +1,9 @@
 [
     {
         "template": "vertx.tpl",
-        "name": "${0}_${1}_${2}",
+        "resources": true,
+        "resourceNamePattern": "vert.x-${vertx}-final.*",
+        "name": "${os}_${java}_${vertx}",
         "repository": "rstiller/vertx",
         "variables": [
             [
