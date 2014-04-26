@@ -16,24 +16,6 @@
             ]
         ]
     }, {
-        "template": "resources-debian.tpl",
-        "resources": true,
-        "resourceNamePattern": ".*${java_path}.*",
-        "name": "debian-${os}_${java}",
-        "repository": "rstiller/java",
-        "variables": [
-            [
-                { "os": "squeeze" },
-                { "os": "wheezy" }
-            ],
-            [
-                {"java": "oracle-8-jdk", "java_flavour": "jdk", "java_version": "8u5", "java_path": "1.8.0_05"},
-                {"java": "oracle-8-jre", "java_flavour": "jre", "java_version": "8u5", "java_path": "1.8.0_05"},
-                {"java": "oracle-7-jdk", "java_flavour": "jdk", "java_version": "7u55", "java_path": "1.7.0_55"},
-                {"java": "oracle-7-jre", "java_flavour": "jre", "java_version": "7u55", "java_path": "1.7.0_55"}
-            ]
-        ]
-    }, {
         "template": "apt-package-ubuntu.tpl",
         "name": "ubuntu-${os}_${java}",
         "repository": "rstiller/java",
@@ -53,18 +35,20 @@
             ]
         ]
     }, {
-        "template": "resources-ubuntu.tpl",
+        "template": "resources.tpl",
         "resources": true,
         "resourceNamePattern": ".*${java_path}.*",
-        "name": "ubuntu-${os}_${java}",
+        "name": "${os}_${java}",
         "repository": "rstiller/java",
         "variables": [
             [
-                { "os": "12.04", "nickname": "precise" },
-                { "os": "12.10", "nickname": "quantal" },
-                { "os": "13.04", "nickname": "raring" },
-                { "os": "13.10", "nickname": "saucy" },
-                { "os": "14.04", "nickname": "trusty" }
+                { "os": "debian-squeeze", "os_family": "debian", "os_version": "squeeze" },
+                { "os": "debian-wheezy", "os_family": "debian", "os_version": "wheezy" },
+                { "os": "ubuntu-12.04", "os_family": "ubuntu", "os_version": "12.04" },
+                { "os": "ubuntu-12.10", "os_family": "ubuntu", "os_version": "12.10" },
+                { "os": "ubuntu-13.04", "os_family": "ubuntu", "os_version": "13.04" },
+                { "os": "ubuntu-13.10", "os_family": "ubuntu", "os_version": "13.10" },
+                { "os": "ubuntu-14.04", "os_family": "ubuntu", "os_version": "14.04" }
             ],
             [
                 {"java": "oracle-8-jdk", "java_flavour": "jdk", "java_version": "8u5", "java_path": "1.8.0_05"},
