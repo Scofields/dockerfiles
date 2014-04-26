@@ -1,8 +1,10 @@
 [
     {
         "template": "tomee.tpl",
-        "name": "${0}_tomee-${1}",
+        "name": "${name}_tomee-${tomee}",
         "repository": "rstiller/tomee",
+        "resources": true,
+        "resourceNamePattern": "apache-tomee-${tomee}.*",
         "variables": [
             [
                 { "name": "debian-squeeze_openjdk-6-jdk" },

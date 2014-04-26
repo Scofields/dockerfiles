@@ -1,6 +1,5 @@
 FROM rstiller/java:${name}
 
-ADD http://archive.apache.org/dist/${path}/apache-tomee-${tomee}-plus.tar.gz /usr/share/apache-tomee-${tomee}.tar.gz
-RUN cd /usr/share ; tar xfvz apache-tomee-${tomee}.tar.gz
+ADD apache-tomee-${tomee}-plus.tar.gz /usr/share/
 
-CMD ['/usr/share/apache-tomee-*/bin/startup.sh']
+CMD ['/usr/share/apache-tomee-plus-${tomee}/bin/startup.sh']
