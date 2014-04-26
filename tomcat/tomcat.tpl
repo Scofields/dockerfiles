@@ -1,6 +1,5 @@
 FROM rstiller/java:${name}
 
-ADD http://archive.apache.org/dist/tomcat/tomcat-${family}/v${tomcat}/bin/apache-tomcat-${tomcat}.tar.gz /usr/share/apache-tomcat-${tomcat}.tar.gz
-RUN cd /usr/share ; tar xfvz apache-tomcat-${tomcat}.tar.gz
+ADD apache-tomcat-${tomcat}.tar.gz /usr/share/
 
-CMD ['/usr/share/apache-tomcat-*/bin/startup.sh']
+CMD ['/usr/share/apache-tomcat-${tomcat}/bin/startup.sh']

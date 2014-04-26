@@ -1,8 +1,10 @@
 [
     {
         "template": "tomcat.tpl",
-        "name": "${0}_tomcat-${1}",
+        "name": "${name}_tomcat-${tomcat}",
         "repository": "rstiller/tomcat",
+        "resources": true,
+        "resourceNamePattern": "apache-tomcat-${tomcat}.*",
         "variables": [
             [
                 { "name": "debian-squeeze_openjdk-7-jdk" },
@@ -42,8 +44,10 @@
     },
     {
         "template": "tomcat.tpl",
-        "name": "${0}_tomcat-${1}",
+        "name": "${name}_tomcat-${tomcat}",
         "repository": "rstiller/tomcat",
+        "resources": true,
+        "resourceNamePattern": ".*${tomcat}.*",
         "variables": [
             [
                 { "name": "debian-squeeze_openjdk-6-jdk" },
