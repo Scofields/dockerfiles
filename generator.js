@@ -107,15 +107,31 @@ var writeFile = function(directory, templateFile, nameTemplate, values, copyReso
     }
     fs.writeFileSync(targetFile, content);
     
+    var logFile = targetDir + '.log';
+    var commands = [];
+    
     if(fs.existsSync(path.join(directory, 'resources')) && copyResources === true) {
         var files = fs.readdirSync(path.resolve(path.join(directory, 'resources')));
         for(var i = 0; i < files.length; i++) {
             if(((!!resourceRegExp && resourceRegExp.test(files[i])) || !resourceRegExp)
                 && !fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
-                spawn('cp', [path.resolve(path.join(directory, 'resources', files[i])), path.resolve(targetDir) + '/']);
+                
+                commands.push(
+                    {
+                        dir: targetDir,
+                        log: logFile,
+                        cmd: ['cp', [path.resolve(path.join(directory, 'resources', files[i])), path.resolve(targetDir) + '/'], {
+                            cwd: targetDir
+                        }],
+                        resource: path.resolve(path.join(directory, 'resources', files[i])) + ' to ' + path.resolve(targetDir) + '/',
+                        type: 'copy'
+                    }
+                );
             }
         }
     }
+    
+    return commands;
 };
 
 var getBuildCommand = function(directory, repository, nameTemplate, values) {
@@ -158,7 +174,12 @@ for(var i = 0; i < configs.length; i++) {
         if(!fs.existsSync(path.resolve(path.join(homeDir, repository)))) {
             fs.mkdirSync(path.resolve(path.join(homeDir, repository)));
         }
-        writeFile(repository, template, config.name, values, config.resources, config.resourceNamePattern);
+        var copyCommands = writeFile(repository, template, config.name, values, config.resources, config.resourceNamePattern);
+        
+        for(var c = 0; c < copyCommands.length; c++) {
+            buildCommands.push(copyCommands[c]);
+        }
+        
         if(build) {
             buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
         }
@@ -180,6 +201,8 @@ var executeNextBuild = function() {
     process.on('exit', function (code) {
         if(!!command.type && command.type === 'push') {
             console.log(command.tag + (code === 0 ? ' pushed' : ' not pushed'));
+        } else if(!!command.type && command.type === 'copy') {
+            console.log(command.resource + (code === 0 ? ' copied' : ' not copied'));
         } else {
             console.log(command.tag + (code === 0 ? ' built' : ' not built'));
         }
