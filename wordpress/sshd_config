@@ -1,0 +1,22 @@
+Host *
+Protocol 2
+ClientAliveInterval 300
+ClientAliveCountMax 0
+IgnoreRhosts yes
+HostbasedAuthentication no
+PermitRootLogin no
+Port 3275
+ListenAddress 0.0.0.0
+PermitEmptyPasswords no
+LogLevel INFO
+UsePrivilegeSeparation yes
+StrictModes yes
+VerifyReverseMapping yes
+AllowTcpForwarding no
+X11Forwarding no
+PasswordAuthentication no
+SendEnv LANG LC_*
+HashKnownHosts yes
+GSSAPIAuthentication yes
+GSSAPIDelegateCredentials no
+    
