@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/usr/bin/puppet apply /puppet/default.pp
