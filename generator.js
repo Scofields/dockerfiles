@@ -11,6 +11,7 @@ var spawn = require('child_process').spawn;
 var configs    = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 var repository = path.dirname(process.argv[2]);
 var build      = !!process.argv[3] && process.argv[3] === '--build';
+var push       = !!process.argv[4] && process.argv[4] === '--push';
 var homeDir    = path.join(process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'], 'shared');
 
 function Variable(values) {
@@ -159,6 +160,30 @@ var getBuildCommand = function(directory, repository, nameTemplate, values) {
     };
 };
 
+var getPushCommand = function(directory, repository, nameTemplate, values) {
+    var targetDir = nameTemplate;
+    var tag = repository + ':';
+    
+    for(var i = 0; i < values.length; i++) {
+        for(var placeholder in values[i]) {
+            targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+        }
+    }
+    
+    tag += targetDir;
+    
+    targetDir = path.join(homeDir, directory, targetDir);
+    logFile = targetDir + '.log';
+    
+    return {
+        dir: targetDir,
+        log: logFile,
+        cmd: ['docker', ['push', repository + ':' + tag]],
+        tag: tag,
+        type: 'push'
+    };
+};
+
 var buildCommands = [];
 for(var i = 0; i < configs.length; i++) {
     var config = configs[i];
@@ -182,6 +207,9 @@ for(var i = 0; i < configs.length; i++) {
         
         if(build) {
             buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
+            if(push) {
+                buildCommands.push(getPushCommand(repository, config.repository, config.name, values));
+            }
         }
     }
 }
