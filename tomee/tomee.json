@@ -42,7 +42,8 @@
                 {"tomee": "1.5.1", "path": "openejb/openejb-4.5.1" },
                 {"tomee": "1.5.2", "path": "tomee/tomee-1.5.2" },
                 {"tomee": "1.6.0", "path": "tomee/tomee-1.6.0" },
-                {"tomee": "1.6.0.1", "path": "tomee/tomee-1.6.0.1" }
+                {"tomee": "1.6.0.1", "path": "tomee/tomee-1.6.0.1" },
+                {"tomee": "1.6.0.2", "path": "tomee/tomee-1.6.0.2" }
             ]
         ]
     }
