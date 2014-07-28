@@ -178,7 +178,7 @@ var getPushCommand = function(directory, repository, nameTemplate, values) {
     return {
         dir: targetDir,
         log: logFile,
-        cmd: ['docker', ['push', repository + ':' + tag]],
+        cmd: ['docker', ['push', tag]],
         tag: tag,
         type: 'push'
     };
