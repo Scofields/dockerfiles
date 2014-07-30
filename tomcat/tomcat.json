@@ -36,9 +36,13 @@
                 {"tomcat": "7.0.50", "family": "7" },
                 {"tomcat": "7.0.52", "family": "7" },
                 {"tomcat": "7.0.53", "family": "7" },
+                {"tomcat": "7.0.54", "family": "7" },
+                {"tomcat": "7.0.55", "family": "7" },
                 {"tomcat": "8.0.1", "family": "8" },
                 {"tomcat": "8.0.3", "family": "8" },
-                {"tomcat": "8.0.5", "family": "8" }
+                {"tomcat": "8.0.5", "family": "8" },
+                {"tomcat": "8.0.8", "family": "8" },
+                {"tomcat": "8.0.9", "family": "8" }
             ]
         ]
     },
@@ -64,7 +68,9 @@
                 {"tomcat": "7.0.47", "family": "7" },
                 {"tomcat": "7.0.50", "family": "7" },
                 {"tomcat": "7.0.52", "family": "7" },
-                {"tomcat": "7.0.53", "family": "7" }
+                {"tomcat": "7.0.53", "family": "7" },
+                {"tomcat": "7.0.54", "family": "7" },
+                {"tomcat": "7.0.55", "family": "7" }
             ]
         ]
     }
