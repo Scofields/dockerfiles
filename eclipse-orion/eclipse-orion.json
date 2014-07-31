@@ -1,6 +1,6 @@
 [
     {
-        "template": "orion.tpl",
+        "template": "eclipse-orion.tpl",
         "name": "${name}_orion-${orion}",
         "repository": "rstiller/eclipse-orion",
         "resources": true,
