@@ -1,0 +1,31 @@
+[
+    {
+        "template": "jonas.tpl",
+        "resources": true,
+        "resourceNamePattern": "jonas-full-${jonas}-bin.*",
+        "name": "${os}_${java}_${jonas}",
+        "repository": "rstiller/jonas",
+        "variables": [
+            [
+                { "os": "debian-squeeze" },
+                { "os": "debian-wheezy" },
+                { "os": "ubuntu-12.04" },
+                { "os": "ubuntu-12.10" },
+                { "os": "ubuntu-13.04" },
+                { "os": "ubuntu-13.10" },
+                { "os": "ubuntu-14.04" }
+            ],
+            [
+                { "java": "openjdk-7-jdk" },
+                { "java": "oracle-7-jdk" },
+                { "java": "oracle-8-jdk" }
+            ],
+            [
+                { "jonas": "5.1.7" },
+                { "jonas": "5.2.3" },
+                { "jonas": "5.2.4" },
+                { "jonas": "5.3.0" }
+            ]
+        ]
+    }
+]
