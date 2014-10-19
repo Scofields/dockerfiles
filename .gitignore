@@ -4,3 +4,4 @@
 *.log
 Dockerfile
 nginx/latest-de_DE.zip
+jenkins/jenkins.war
