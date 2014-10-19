@@ -3,3 +3,4 @@
 *.tar.gz
 *.log
 Dockerfile
+nginx/latest-de_DE.zip

@@ -1,0 +1,36 @@
+#!/bin/sh
+
+service mysql start
+sleep 2
+echo "MySQL Server started"
+
+if `mysql -u root -e 'exit'`; then
+    rm -f /var/www/wp-password.php
+    echo "Removed wp-password file"
+fi
+
+if [ ! -f /var/www/wp-password.php ]; then
+    WORDPRESS_PASSWORD=`openssl rand -base64 12`
+
+    echo "<?php\ndefine('DB_PASSWORD', '${WORDPRESS_PASSWORD}');" > /var/www/wp-password.php
+    echo "New wp-password file written"
+
+    mysql_install_db
+    echo "MySQL Server initialized"
+    mysql -u root -h 127.0.0.1 -e "CREATE DATABASE IF NOT EXISTS wordpress; GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost' IDENTIFIED BY '${WORDPRESS_PASSWORD}' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+    echo "Wordpress DB initialized"
+    mysqladmin -u root password `openssl rand -base64 12`
+    echo "MySQL Server root password set"
+fi
+
+if [ ! -f /var/www/wp-keys.php ]; then
+    echo '<?php ' > /var/www/wp-keys.php
+    echo `wget -qO- http://api.wordpress.org/secret-key/1.1/salt/` >> /var/www/wp-keys.php
+fi
+
+chown -R www-data:www-data /var/www/
+echo "File Access ensured"
+
+service mysql stop
+echo "MySQL Server stopped"
+
