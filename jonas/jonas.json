@@ -10,9 +10,6 @@
                 { "os": "debian-squeeze" },
                 { "os": "debian-wheezy" },
                 { "os": "ubuntu-12.04" },
-                { "os": "ubuntu-12.10" },
-                { "os": "ubuntu-13.04" },
-                { "os": "ubuntu-13.10" },
                 { "os": "ubuntu-14.04" }
             ],
             [

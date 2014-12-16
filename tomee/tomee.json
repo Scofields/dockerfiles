@@ -13,12 +13,6 @@
                 { "name": "debian-wheezy_openjdk-7-jdk" },
                 { "name": "ubuntu-12.04_openjdk-6-jdk" },
                 { "name": "ubuntu-12.04_openjdk-7-jdk" },
-                { "name": "ubuntu-12.10_openjdk-6-jdk" },
-                { "name": "ubuntu-12.10_openjdk-7-jdk" },
-                { "name": "ubuntu-13.04_openjdk-6-jdk" },
-                { "name": "ubuntu-13.04_openjdk-7-jdk" },
-                { "name": "ubuntu-13.10_openjdk-6-jdk" },
-                { "name": "ubuntu-13.10_openjdk-7-jdk" },
                 { "name": "ubuntu-14.04_openjdk-6-jdk" },
                 { "name": "ubuntu-14.04_openjdk-7-jdk" },
                 { "name": "debian-squeeze_oracle-7-jdk" },
@@ -27,12 +21,6 @@
                 { "name": "debian-wheezy_oracle-8-jdk" },
                 { "name": "ubuntu-12.04_oracle-7-jdk" },
                 { "name": "ubuntu-12.04_oracle-8-jdk" },
-                { "name": "ubuntu-12.10_oracle-7-jdk" },
-                { "name": "ubuntu-12.10_oracle-8-jdk" },
-                { "name": "ubuntu-13.04_oracle-7-jdk" },
-                { "name": "ubuntu-13.04_oracle-8-jdk" },
-                { "name": "ubuntu-13.10_oracle-7-jdk" },
-                { "name": "ubuntu-13.10_oracle-8-jdk" },
                 { "name": "ubuntu-14.04_oracle-7-jdk" },
                 { "name": "ubuntu-14.04_oracle-8-jdk" }
             ],
@@ -43,7 +31,9 @@
                 {"tomee": "1.5.2", "path": "tomee/tomee-1.5.2" },
                 {"tomee": "1.6.0", "path": "tomee/tomee-1.6.0" },
                 {"tomee": "1.6.0.1", "path": "tomee/tomee-1.6.0.1" },
-                {"tomee": "1.6.0.2", "path": "tomee/tomee-1.6.0.2" }
+                {"tomee": "1.6.0.2", "path": "tomee/tomee-1.6.0.2" },
+                {"tomee": "1.7.0", "path": "tomee/tomee-1.7.0" },
+                {"tomee": "1.7.1", "path": "tomee/tomee-1.7.1" }
             ]
         ]
     }

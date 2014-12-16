@@ -14,35 +14,34 @@
                 { "name": "debian-wheezy_oracle-7-jdk" },
                 { "name": "debian-wheezy_oracle-8-jdk" },
                 { "name": "ubuntu-12.04_openjdk-7-jdk" },
-                { "name": "ubuntu-12.10_openjdk-7-jdk" },
-                { "name": "ubuntu-13.04_openjdk-7-jdk" },
-                { "name": "ubuntu-13.10_openjdk-7-jdk" },
                 { "name": "ubuntu-14.04_openjdk-7-jdk" },
                 { "name": "ubuntu-12.04_oracle-7-jdk" },
                 { "name": "ubuntu-12.04_oracle-8-jdk" },
-                { "name": "ubuntu-12.10_oracle-7-jdk" },
-                { "name": "ubuntu-12.10_oracle-8-jdk" },
-                { "name": "ubuntu-13.04_oracle-7-jdk" },
-                { "name": "ubuntu-13.04_oracle-8-jdk" },
-                { "name": "ubuntu-13.10_oracle-7-jdk" },
-                { "name": "ubuntu-13.10_oracle-8-jdk" },
                 { "name": "ubuntu-14.04_oracle-7-jdk" },
                 { "name": "ubuntu-14.04_oracle-8-jdk" }
             ],
             [
                 {"tomcat": "6.0.37", "family": "6" },
                 {"tomcat": "6.0.39", "family": "6" },
+                {"tomcat": "6.0.41", "family": "6" },
+                {"tomcat": "6.0.43", "family": "6" },
                 {"tomcat": "7.0.47", "family": "7" },
                 {"tomcat": "7.0.50", "family": "7" },
                 {"tomcat": "7.0.52", "family": "7" },
                 {"tomcat": "7.0.53", "family": "7" },
                 {"tomcat": "7.0.54", "family": "7" },
                 {"tomcat": "7.0.55", "family": "7" },
+                {"tomcat": "7.0.56", "family": "7" },
+                {"tomcat": "7.0.57", "family": "7" },
                 {"tomcat": "8.0.1", "family": "8" },
                 {"tomcat": "8.0.3", "family": "8" },
                 {"tomcat": "8.0.5", "family": "8" },
                 {"tomcat": "8.0.8", "family": "8" },
-                {"tomcat": "8.0.9", "family": "8" }
+                {"tomcat": "8.0.9", "family": "8" },
+                {"tomcat": "8.0.11", "family": "8" },
+                {"tomcat": "8.0.12", "family": "8" },
+                {"tomcat": "8.0.14", "family": "8" },
+                {"tomcat": "8.0.15", "family": "8" }
             ]
         ]
     },
@@ -57,20 +56,21 @@
                 { "name": "debian-squeeze_openjdk-6-jdk" },
                 { "name": "debian-wheezy_openjdk-6-jdk" },
                 { "name": "ubuntu-12.04_openjdk-6-jdk" },
-                { "name": "ubuntu-12.10_openjdk-6-jdk" },
-                { "name": "ubuntu-13.04_openjdk-6-jdk" },
-                { "name": "ubuntu-13.10_openjdk-6-jdk" },
                 { "name": "ubuntu-14.04_openjdk-6-jdk" }
             ],
             [
                 {"tomcat": "6.0.37", "family": "6" },
                 {"tomcat": "6.0.39", "family": "6" },
+                {"tomcat": "6.0.41", "family": "6" },
+                {"tomcat": "6.0.43", "family": "6" },
                 {"tomcat": "7.0.47", "family": "7" },
                 {"tomcat": "7.0.50", "family": "7" },
                 {"tomcat": "7.0.52", "family": "7" },
                 {"tomcat": "7.0.53", "family": "7" },
                 {"tomcat": "7.0.54", "family": "7" },
-                {"tomcat": "7.0.55", "family": "7" }
+                {"tomcat": "7.0.55", "family": "7" },
+                {"tomcat": "7.0.56", "family": "7" },
+                {"tomcat": "7.0.57", "family": "7" }
             ]
         ]
     }
