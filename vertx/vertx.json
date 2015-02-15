@@ -1,7 +1,17 @@
 [
     {
         "template": "vertx.tpl",
-        "resources": true,
+        "resources": {
+            "vert.x-2.0.0-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.0.0-final.tar.gz",
+            "vert.x-2.0.1-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.0.1-final.tar.gz",
+            "vert.x-2.0.2-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.0.2-final.tar.gz",
+            "vert.x-2.1-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.1.tar.gz",
+            "vert.x-2.1.1-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.1.1.tar.gz",
+            "vert.x-2.1.2-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.1.2.tar.gz",
+            "vert.x-2.1.3-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.1.3.tar.gz",
+            "vert.x-2.1.4-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.1.4.tar.gz",
+            "vert.x-2.1.5-final.tar.gz": "http://dl.bintray.com/vertx/downloads/vert.x-2.1.5.tar.gz"
+        },
         "resourceNamePattern": "vert.x-${vertx}-final.*",
         "name": "${os}_${java}_${vertx}",
         "repository": "rstiller/vertx",

@@ -3,7 +3,17 @@
         "template": "tomee.tpl",
         "name": "${name}_tomee-${tomee}",
         "repository": "rstiller/tomee",
-        "resources": true,
+        "resources": {
+            "apache-tomee-1.7.1-plus.tar.gz": "http://www.eu.apache.org/dist/tomee/tomee-1.7.1/apache-tomee-1.7.1-plus.tar.gz",
+            "apache-tomee-1.7.0-plus.tar.gz": "http://www.eu.apache.org/dist/tomee/tomee-1.7.0/apache-tomee-1.7.0-plus.tar.gz",
+            "apache-tomee-1.6.0.2-plus.tar.gz": "http://www.eu.apache.org/dist/tomee/tomee-1.6.0.2/apache-tomee-1.6.0.2-plus.tar.gz",
+            "apache-tomee-1.6.0.1-plus.tar.gz": "http://www.eu.apache.org/dist/tomee/tomee-1.6.0.1/apache-tomee-1.6.0.1-plus.tar.gz",
+            "apache-tomee-1.6.0-plus.tar.gz": "http://www.eu.apache.org/dist/tomee/tomee-1.6.0/apache-tomee-1.6.0-plus.tar.gz",
+            "apache-tomee-1.5.2-plus.tar.gz": "http://www.eu.apache.org/dist/tomee/tomee-1.5.2/apache-tomee-1.5.2-plus.tar.gz",
+            "apache-tomee-1.5.1-plus.tar.gz": "http://archive.apache.org/dist/openejb/openejb-4.5.1/apache-tomee-1.5.1-plus.tar.gz",
+            "apache-tomee-1.5.0-plus.tar.gz": "http://archive.apache.org/dist/openejb/openejb-4.5.0/apache-tomee-1.5.0-plus.tar.gz",
+            "apache-tomee-1.0.0-plus.tar.gz": "http://archive.apache.org/dist/openejb/openejb-4.0.0/apache-tomee-1.0.0-plus.tar.gz"
+        },
         "resourceNamePattern": "apache-tomee-${tomee}.*",
         "variables": [
             [

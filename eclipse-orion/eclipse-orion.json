@@ -3,7 +3,13 @@
         "template": "eclipse-orion.tpl",
         "name": "${name}_orion-${orion}",
         "repository": "rstiller/eclipse-orion",
-        "resources": true,
+        "resources": {
+            "eclipse-orion-3.0-linux.gtk.x86_64.zip": "http://archive.eclipse.org/orion/drops/R-3.0-201306251555/download.php?dropFile=eclipse-orion-3.0-linux.gtk.x86_64.zip",
+            "eclipse-orion-4.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-4.0-201310301703/eclipse-orion-4.0-linux.gtk.x86_64.zip",
+            "eclipse-orion-5.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-5.0-201402262325/eclipse-orion-5.0-linux.gtk.x86_64.zip",
+            "eclipse-orion-6.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-6.0-201406290222/eclipse-orion-6.0-linux.gtk.x86_64.zip",
+            "eclipse-orion-7.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-7.0-201410282256/eclipse-orion-7.0-linux.gtk.x86_64.zip"
+        },
         "resourceNamePattern": "eclipse-orion-${orion}.*",
         "variables": [
             [

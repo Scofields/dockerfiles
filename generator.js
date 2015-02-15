@@ -83,8 +83,8 @@ function Iterator(variables) {
     
 }
 
-var writeFile = function(directory, templateFile, nameTemplate, values, copyResources, resourceNamePattern) {
-    var targetDir = nameTemplate;
+var writeDockerfile = function(directory, templateFile, nameTemplate, values, resourceNamePattern) {
+    var version = nameTemplate;
     var content = fs.readFileSync(templateFile, 'utf8');
     var resourceRegExp = resourceNamePattern;
     
@@ -93,7 +93,7 @@ var writeFile = function(directory, templateFile, nameTemplate, values, copyReso
             if(!!resourceRegExp) {
                 resourceRegExp = resourceRegExp.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
             }
-            targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+            version = version.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
             content = content.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
         }
     }
@@ -101,59 +101,33 @@ var writeFile = function(directory, templateFile, nameTemplate, values, copyReso
         resourceRegExp = new RegExp(resourceRegExp, 'g');
     }
     
-    targetDir = path.join(homeDir, directory, targetDir);
-    targetFile = path.join(targetDir, 'Dockerfile');
+    var targetDir = path.join(homeDir, directory, 'tmp');
+    targetFile = path.join(targetDir, version);
     if(!fs.existsSync(targetDir)) {
         fs.mkdirSync(targetDir);
     }
     fs.writeFileSync(targetFile, content);
-    
-    var logFile = targetDir + '.log';
-    var commands = [];
-    
-    if(fs.existsSync(path.join(directory, 'resources')) && copyResources === true) {
-        var files = fs.readdirSync(path.resolve(path.join(directory, 'resources')));
-        for(var i = 0; i < files.length; i++) {
-            if(((!!resourceRegExp && resourceRegExp.test(files[i])) || !resourceRegExp)
-                && !fs.existsSync(path.resolve(path.join(targetDir, files[i])))) {
-                
-                commands.push(
-                    {
-                        dir: targetDir,
-                        log: logFile,
-                        cmd: ['cp', [path.resolve(path.join(directory, 'resources', files[i])), path.resolve(targetDir) + '/'], {
-                            cwd: targetDir
-                        }],
-                        resource: path.resolve(path.join(directory, 'resources', files[i])) + ' to ' + path.resolve(targetDir) + '/',
-                        type: 'copy'
-                    }
-                );
-            }
-        }
-    }
-    
-    return commands;
 };
 
 var getBuildCommand = function(directory, repository, nameTemplate, values) {
-    var targetDir = nameTemplate;
+    var version = nameTemplate;
     var tag = repository + ':';
     
     for(var i = 0; i < values.length; i++) {
         for(var placeholder in values[i]) {
-            targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+            version = version.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
         }
     }
     
-    tag += targetDir;
+    tag += version;
     
-    targetDir = path.join(homeDir, directory, targetDir);
-    logFile = targetDir + '.log';
+    var targetDir = path.join(homeDir, directory, 'tmp');
+    var logFile = path.join(homeDir, directory, 'tmp', version + '.log');
     
     return {
         dir: targetDir,
         log: logFile,
-        cmd: ['docker', ['build', '--rm', '-t', tag, '.'], {
+        cmd: ['docker', ['build', '--force-rm=true', '--rm', '-t', tag, '-f', path.join(targetDir, version), '.'], {
             cwd: targetDir
         }],
         tag: tag
@@ -161,19 +135,19 @@ var getBuildCommand = function(directory, repository, nameTemplate, values) {
 };
 
 var getPushCommand = function(directory, repository, nameTemplate, values) {
-    var targetDir = nameTemplate;
+    var version = nameTemplate;
     var tag = repository + ':';
     
     for(var i = 0; i < values.length; i++) {
         for(var placeholder in values[i]) {
-            targetDir = targetDir.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+            version = version.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
         }
     }
     
-    tag += targetDir;
+    tag += version;
     
-    targetDir = path.join(homeDir, directory, targetDir);
-    logFile = targetDir + '.log';
+    var targetDir = path.join(homeDir, directory, 'tmp');
+    var logFile = path.join(homeDir, directory, 'tmp', version + '.log');
     
     return {
         dir: targetDir,
@@ -181,6 +155,34 @@ var getPushCommand = function(directory, repository, nameTemplate, values) {
         cmd: ['docker', ['push', tag]],
         tag: tag,
         type: 'push'
+    };
+};
+
+var getDownloadCommand = function(directory, nameTemplate, values, filename, url) {
+    var downloadFolder = path.resolve(path.join(homeDir, directory, 'tmp'));
+    
+    if(!fs.existsSync(path.resolve(downloadFolder))) {
+        fs.mkdirSync(path.resolve(downloadFolder));
+    }
+    
+    var downloadFile = path.join(downloadFolder, filename);
+    var version = nameTemplate;
+    
+    for(var i = 0; i < values.length; i++) {
+        for(var placeholder in values[i]) {
+            version = version.replace(new RegExp('\\$\\{' + placeholder + '\\}', 'g'), values[i][placeholder]);
+        }
+    }
+    
+    var logFile = path.join(homeDir, directory, 'tmp', version + '.log');
+    
+    return {
+        dir: downloadFolder,
+        log: logFile,
+        cmd: ['/usr/bin/wget', ['--output-document=' + downloadFile, url]],
+        type: 'download',
+        url: url,
+        file: downloadFile
     };
 };
 
@@ -193,17 +195,20 @@ for(var i = 0; i < configs.length; i++) {
         variables.push(new Variable(config.variables[variableIndex]));
     }
 
+    
     var iterator = new Iterator(variables);
     while(iterator.hasNext()) {
         var values = iterator.next();
         if(!fs.existsSync(path.resolve(path.join(homeDir, repository)))) {
             fs.mkdirSync(path.resolve(path.join(homeDir, repository)));
         }
-        var copyCommands = writeFile(repository, template, config.name, values, config.resources, config.resourceNamePattern);
-        
-        for(var c = 0; c < copyCommands.length; c++) {
-            buildCommands.push(copyCommands[c]);
+        if(!!config.resources) {
+            for(var filename in config.resources) {
+                buildCommands.push(getDownloadCommand(repository, config.name, values, filename, config.resources[filename]));
+            }
         }
+        
+        writeDockerfile(repository, template, config.name, values, config.resourceNamePattern);
         
         if(build) {
             buildCommands.push(getBuildCommand(repository, config.repository, config.name, values));
@@ -221,6 +226,15 @@ var executeNextBuild = function() {
         fs.mkdirSync(command.dir);
     }
     
+    if(!!command.type && command.type === 'download') {
+        if(fs.existsSync(command.file)) {
+            if(commandIndex < buildCommands.length) {
+                executeNextBuild();
+            }
+            return;
+        }
+    }
+    
     var logFileStream = fs.createWriteStream(command.log);
     var process = spawn.apply(null, command.cmd);
     
@@ -229,8 +243,8 @@ var executeNextBuild = function() {
     process.on('exit', function (code) {
         if(!!command.type && command.type === 'push') {
             console.log(command.tag + (code === 0 ? ' pushed' : ' not pushed'));
-        } else if(!!command.type && command.type === 'copy') {
-            console.log(command.resource + (code === 0 ? ' copied' : ' not copied'));
+        } else if(!!command.type && command.type === 'download') {
+            console.log(command.url + (code === 0 ? ' downloaded' : ' not downloaded'));
         } else {
             console.log(command.tag + (code === 0 ? ' built' : ' not built'));
         }

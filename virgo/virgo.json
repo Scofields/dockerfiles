@@ -1,7 +1,14 @@
 [
     {
         "template": "virgo-std.tpl",
-        "resources": true,
+        "resources": {
+            "virgo-tomcat-server-3.0.3.RELEASE.zip": "http://download.eclipse.org/virgo/release/VTS/3.0.3.RELEASE/virgo-tomcat-server-3.0.3.RELEASE.zip",
+            "virgo-tomcat-server-3.5.0.RELEASE.zip": "http://download.eclipse.org/virgo/release/VTS/3.5.0.RELEASE/virgo-tomcat-server-3.5.0.RELEASE.zip",
+            "virgo-tomcat-server-3.6.3.RELEASE.zip": "http://download.eclipse.org/virgo/release/VP/3.6.3.RELEASE/virgo-tomcat-server-3.6.3.RELEASE.zip",
+            "virgo-jetty-server-3.0.3.RELEASE.zip": "http://download.eclipse.org/virgo/release/VJS/3.0.3.RELEASE/virgo-jetty-server-3.0.3.RELEASE.zip",
+            "virgo-jetty-server-3.5.0.RELEASE.zip": "http://download.eclipse.org/virgo/release/VJS/3.5.0.RELEASE/virgo-jetty-server-3.5.0.RELEASE.zip",
+            "virgo-jetty-server-3.6.3.RELEASE.zip": "http://download.eclipse.org/virgo/release/VP/3.6.3.RELEASE/virgo-jetty-server-3.6.3.RELEASE.zip"
+        },
         "resourceNamePattern": "virgo-${server}-server-${virgo}.RELEASE.*",
         "name": "${os}_${java}_${server}_${virgo}",
         "repository": "rstiller/virgo",
@@ -30,7 +37,10 @@
     },
     {
         "template": "virgo-nano.tpl",
-        "resources": true,
+        "resources": {
+            "virgo-nano-full-3.5.0.RELEASE.zip": "http://download.eclipse.org/virgo/release/VN/3.5.0.RELEASE/virgo-nano-full-3.5.0.RELEASE.zip",
+            "virgo-nano-full-3.6.3.RELEASE.zip": "http://download.eclipse.org/virgo/release/VP/3.6.3.RELEASE/virgo-nano-full-3.6.3.RELEASE.zip"
+        },
         "resourceNamePattern": "virgo-${server}-full-${virgo}.RELEASE.*",
         "name": "${os}_${java}_${server}_${virgo}",
         "repository": "rstiller/virgo",
