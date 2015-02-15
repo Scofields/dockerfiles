@@ -199,6 +199,9 @@ for(var i = 0; i < configs.length; i++) {
     var iterator = new Iterator(variables);
     while(iterator.hasNext()) {
         var values = iterator.next();
+        if(!fs.existsSync(path.resolve(homeDir))) {
+            fs.mkdirSync(path.resolve(homeDir));
+        }
         if(!fs.existsSync(path.resolve(path.join(homeDir, repository)))) {
             fs.mkdirSync(path.resolve(path.join(homeDir, repository)));
         }
