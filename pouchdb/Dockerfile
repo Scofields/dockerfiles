@@ -1,0 +1,14 @@
+FROM iojs:slim
+
+RUN apt-get -qq update && \
+    apt-get -y --no-install-recommends install g++ python make git && \
+    npm install -g pouchdb-server && \
+    apt-get -y purge g++ make python git && \
+    apt-get -y autoremove && \
+    apt-get -y autoclean
+
+RUN mkdir /pouchdb
+
+WORKDIR /pouchdb
+
+CMD ["pouchdb-server", "-p", "5984", "-o", "0.0.0.0"]
