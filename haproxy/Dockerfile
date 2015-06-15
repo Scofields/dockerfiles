@@ -1,11 +1,6 @@
-FROM debian:jessie
+FROM gliderlabs/alpine
 
-RUN apt-get -qq update && \
-    apt-get install -y libnl-utils ufw haproxy python-setuptools ca-certificates && \
-    easy_install supervisor && \
-    apt-get -y autoremove && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk --update add haproxy iptables iproute2 supervisor libnl3
 
 ADD haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD haproxy.sh /haproxy.sh
@@ -15,8 +10,8 @@ RUN chmod a+x /haproxy.sh
 RUN mkdir -p /var/run/haproxy /var/lib/haproxy
 RUN chown -R haproxy:haproxy /var/run/haproxy /var/lib/haproxy
 
-RUN echo "* soft nofile 1048576" >> /etc/security/limits.conf
-RUN echo "* hard nofile 1048576" >> /etc/security/limits.conf
+#RUN echo "* soft nofile 1048576" >> /etc/security/limits.conf
+#RUN echo "* hard nofile 1048576" >> /etc/security/limits.conf
 
 EXPOSE 80 443
 

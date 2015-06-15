@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -29,6 +29,8 @@ fi
 
 echo "queuing incomming requests"
 nl-qdisc-add --dev=lo --parent=1:4 --id=40: --update plug --buffer
+sleep 0.1
+
 echo "starting haproxy"
 /usr/sbin/haproxy -f /etc/haproxy/haproxy.cfg -D -p /var/run/haproxy.pid -sf $(/bin/cat /var/run/haproxy.pid)
 echo "dequeuing requests"
