@@ -8,7 +8,8 @@
             "eclipse-orion-4.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-4.0-201310301703/eclipse-orion-4.0-linux.gtk.x86_64.zip",
             "eclipse-orion-5.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-5.0-201402262325/eclipse-orion-5.0-linux.gtk.x86_64.zip",
             "eclipse-orion-6.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-6.0-201406290222/eclipse-orion-6.0-linux.gtk.x86_64.zip",
-            "eclipse-orion-7.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-7.0-201410282256/eclipse-orion-7.0-linux.gtk.x86_64.zip"
+            "eclipse-orion-7.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-7.0-201410282256/eclipse-orion-7.0-linux.gtk.x86_64.zip",
+            "eclipse-orion-8.0-linux.gtk.x86_64.zip": "http://download.eclipse.org/orion/drops/R-8.0-201502161823/eclipse-orion-8.0-linux.gtk.x86_64.zip"
         },
         "resourceNamePattern": "eclipse-orion-${orion}.*",
         "variables": [
@@ -35,7 +36,8 @@
                 {"orion": "4.0", "version": "R-4.0-201310301703"},
                 {"orion": "5.0", "version": "R-5.0-201402262325"},
                 {"orion": "6.0", "version": "R-6.0-201406290222"},
-                {"orion": "7.0", "version": "R-7.0-201410282256"}
+                {"orion": "7.0", "version": "R-7.0-201410282256"},
+                {"orion": "8.0", "version": "R-8.0-201502161823"}
             ]
         ]
     }
