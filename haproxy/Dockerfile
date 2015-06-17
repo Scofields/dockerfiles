@@ -1,6 +1,6 @@
 FROM gliderlabs/alpine
 
-RUN apk --update add haproxy iptables iproute2 supervisor libnl3
+RUN apk --update add haproxy iptables supervisor irqbalance
 
 ADD haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD haproxy.sh /haproxy.sh
