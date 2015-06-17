@@ -1,6 +1,6 @@
 # pouchdb-server
 
-AN image based on iojs:slim with pouchdb server and leveldown database.
+An image based on iojs:slim with pouchdb server and leveldown database.
 
 RUN:
 
